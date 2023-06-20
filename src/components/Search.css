@@ -1,0 +1,9 @@
+.search-container{
+    width: 100%;
+}
+.search-container p{
+    color: #bec7bf;
+    width: 80%;
+    text-align: center; 
+    margin-top: 5px;
+}

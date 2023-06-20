@@ -1,0 +1,32 @@
+.header-container{
+    background-color: #0c0f15;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+.icon-container{
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.icon-container span{
+    margin-left: 8px;
+    color: #0ae98a;
+}
+.icon-container img{
+    width: 35px;
+    margin-left: 10px;
+}
+.icon-container img:hover{
+    cursor: pointer;
+}
+.links-container{
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.links-container .nav-link{
+    color: #ffffff;
+    text-decoration: none;
+}

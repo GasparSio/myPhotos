@@ -1,0 +1,34 @@
+.search-container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    min-width: 310px;
+    margin: 25px auto;
+    max-width: 90%;
+}
+.search-Input{
+    height: 47px;
+    color: #bec7bf;
+    border-radius: 27px;
+    background-color: #ffffff;
+    width: 90%;
+}
+.search-Input label{
+    padding-left: 38px;
+}
+.search-icon-container{
+    position: relative;
+    left: 37px;
+    z-index: 1;
+}
+.search-icon{
+    color: #0c0f15;
+}
+.search-button{
+    position: absolute;
+    right: 89px;
+    height: 35px;
+    width: 81px;
+    border-radius: 23px !important;
+    top: 5px;
+}
