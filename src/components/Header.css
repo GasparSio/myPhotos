@@ -2,7 +2,7 @@
     background-color: #0c0f15;
     display: flex;
     align-items: center;
-    height: 50px;
+    min-height: 7vh;
 }
 .icon-container{
     width: 50%;

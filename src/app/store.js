@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import counterReducer from '../features/counter/counterSlice';
+import searchReducer from '../features/searchSlice/searchSlice.jsx';
+// import favsReducer from '../features/searchSlice/searchSlice.jsx';
 
 export const store = configureStore({
   reducer: {
-    // counter: counterReducer,
+    search: searchReducer,
+    // favImages: favsReducer,
   },
 });
