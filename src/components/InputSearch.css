@@ -43,5 +43,10 @@
     justify-content: space-around;
     flex-wrap: wrap;
     row-gap: 15px;
-    /* min-height: 80vh; */
+}
+.alert-container{
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    width: 30%;
 }
