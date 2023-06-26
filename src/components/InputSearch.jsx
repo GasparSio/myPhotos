@@ -4,7 +4,7 @@ import { searchPhotos } from '../features/searchSlice/searchSlice';
 import { addToFavorites } from '../features/myFavsSlice/myFavsSlice';
 import '../components/InputSearch.css';
 
-import { TextField, Modal, Typography, Alert, Stack } from '@mui/material';
+import { TextField, Alert, Stack } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Button } from '@mui/material';
 
@@ -14,23 +14,14 @@ const SearchBar = () => {
   const searchResults = useSelector((state) => state.search.results);
   const [searchQuery, setSearchQuery] = useState('');
   const favorites = useSelector((state) => state.favorites);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-
 
   const handleSearch = () => {
     dispatch(searchPhotos(searchQuery));
   };
-  const handleToggleFavorite = (photo) => {
-    dispatch(addToFavorites(photo.id));
+  const handleAddToFavorites = (photo) => {
+    dispatch(addToFavorites(photo));
     setShowAlert(true);
-
-    if (isFavorite(photo.id)) {
-      setAlertMessage('Deleted from favorite');
-    } else {
-      setAlertMessage('Added to favorite');
-    }
 
     setTimeout(() => {
       setShowAlert(false);
@@ -58,21 +49,20 @@ const SearchBar = () => {
       </div>
       <div className='photos-container'>
         {searchResults.map((photo) => (
-          <div key={photo.id}>
+          <div key={photo.id} className='photos-container-img'>
               <img src={photo.urls.small} alt={photo.alt_description} />
-              <div onClick={() => handleToggleFavorite(photo)} className='fav-icon'>
+              <div onClick={() => handleAddToFavorites(photo)} className='fav-icon'>
                 <FavoriteIcon style={{
-                    color: isFavorite(photo.id) ? 'red' : 'gray',
+                    color: isFavorite(photo.id) ? 'green' : 'gray',
                   }}
                 />
-                {favorites.includes(photo.id) ? 'Agregado a favoritos' : 'Agregar a favoritos'}
               </div>
           </div>
         ))}
       </div>
         {(showAlert) && (
           <Stack spacing={2} className='alert-container'>
-            <Alert severity="success">{alertMessage}</Alert>
+            <Alert severity="success">Added to favorite</Alert>
           </Stack>
       )}
     </div>

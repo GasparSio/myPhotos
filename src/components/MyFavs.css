@@ -1,3 +1,16 @@
+.fav-container{
+    min-height: 87vh;
+}
 .fav-container p{
     color: azure;
+}
+.photos-fav-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    row-gap: 15px;
+}
+.photos-fav-container-img{
+    position: relative;
 }

@@ -50,3 +50,11 @@
     right: 1%;
     width: 30%;
 }
+.photos-container-img{
+    position: relative;
+}
+.fav-icon{
+    position: absolute;
+    top: 1%;
+    right: 1%;
+}
