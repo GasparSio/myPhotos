@@ -5,10 +5,10 @@ import { TextField, Alert, Stack } from '@mui/material';
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { removeFromFavorites } from '../features/myFavsSlice/myFavsSlice';
 
 import Header from "../components/Header";
 import Footer from "./Footer";
+import { removeFromFavorites } from '../features/myFavsSlice/myFavsSlice';
 import '../components/MyFavs.css';
 
 const MyFavs = () => {

@@ -8,7 +8,6 @@ import { TextField, Alert, Stack } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Button } from '@mui/material';
 
-
 const SearchBar = () => {
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.search.results);
@@ -27,8 +26,8 @@ const SearchBar = () => {
       setShowAlert(false);
     }, 1000);
   };
+  
   const isFavorite = (photoId) => favorites.includes(photoId);
-
 
   return (
     <div className='search-bar-container'>
@@ -53,7 +52,7 @@ const SearchBar = () => {
               <img src={photo.urls.small} alt={photo.alt_description} />
               <div onClick={() => handleAddToFavorites(photo)} className='fav-icon'>
                 <FavoriteIcon style={{
-                    color: isFavorite(photo.id) ? 'green' : 'gray',
+                    color: favorites.includes(photo.id) ? 'red' : 'gray',
                   }}
                 />
               </div>
