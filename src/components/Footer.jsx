@@ -11,7 +11,7 @@ const Footer = () => {
     return (
         <div className="footer-container">
             <img src="../../logoGreen.png" alt="iconLogo" onClick={handleClick}/>
-            <p>myPhotos. </p>
+            <p onClick={handleClick} style={{cursor:'pointer'}}>myPhotos. </p>
             <a 
             href="https://github.com/GasparSio"
             target="_blank"

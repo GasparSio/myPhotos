@@ -8,7 +8,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* margin-top: 30px; */
+    padding-top: 100px;
 }
 .home-container h1{
     color: #ffffff;
@@ -18,4 +18,7 @@
     width: 50%;
     text-align: center; 
     margin-bottom: 30px;
+}
+.button-search{
+    background-color: #07b96d !important;
 }
