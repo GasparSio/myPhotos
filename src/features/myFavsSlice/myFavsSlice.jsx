@@ -34,10 +34,10 @@ const favoritesSlice = createSlice({
       return updatedState;
     },
     updatePhotoDescription: (state, action) => {
-      const { id, description } = action.payload;
-      const photoToUpdate = state.find((photo) => photo.id === id);
-      if (photoToUpdate) {
-        photoToUpdate.description = description;
+      const updatedPhoto = action.payload;
+      const index = state.findIndex((photo) => photo.id === updatedPhoto.id);
+      if (index !== -1) {
+        state[index].description = updatedPhoto.description;
         localStorage.setItem('favorites', JSON.stringify(state));
       }
     },

@@ -26,25 +26,25 @@ const SearchBar = () => {
   
       setTimeout(() => {
         setShowAlert(false);
-      }, 1500);
+      }, 1000);
     }
   };
   
+  // const isFavorite = (photoId) => favorites.includes(photoId);
+
   return (
     <div className='search-bar-container'>
-      <div className='search-input-container'>
+      <div className='input-container'>
         <TextField
           label="Start searching"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           variant="outlined"
-          className='search-input'
-        >
-        </TextField>
-          <Button variant="contained" onClick={handleSearch} className='search-button'>
-            Search
-          </Button>
-
+          className='search-Input'
+        />
+        <Button variant="contained" color="success" onClick={handleSearch} className='search-button'>
+          Search
+        </Button>
       </div>
       <div className='search-p-container'>
         <p>Search without entering a parameter and a list of random images will be displayed</p>
@@ -55,8 +55,7 @@ const SearchBar = () => {
               <img src={photo.urls.small} alt={photo.alt_description} />
               <div onClick={() => handleAddToFavorites(photo)} className='fav-icon'>
                 <FavoriteIcon style={{
-                    cursor: 'pointer',
-                    color: favorites.find((image) => image.id === photo.id) ? '#07b96d  ' : 'gray'
+                    color: favorites.find((image) => image.id === photo.id) ? 'red' : 'gray'
                   }}
                 />
               </div>

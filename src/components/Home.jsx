@@ -22,7 +22,7 @@ export default function Home() {
             myPhotos App
           </h1>
           <p>In this website you will be able to search for any kind of pictures, save it in myFavs Section, and download them in high quality</p>
-          <Button variant="contained" className='button-search' onClick={handleClick}>
+          <Button variant="contained" color="success" onClick={handleClick}>
               Start searching
           </Button>
         </div>

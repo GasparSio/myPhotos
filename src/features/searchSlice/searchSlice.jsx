@@ -7,10 +7,10 @@ export const searchPhotos = createAsyncThunk(
   'search/searchPhotos', 
   async (query) => {
   try {
-    let url = `https://api.unsplash.com/photos/random/?client_id=${API_KEY}&count=30&fit=fill`;
+    let url = `https://api.unsplash.com/photos/random/?client_id=${API_KEY}&count=30`;
 
     if (query) {
-      url = `https://api.unsplash.com/search/photos/?client_id=${API_KEY}&query=${query}&per_page=30&fit=fill`;
+      url = `https://api.unsplash.com/search/photos/?client_id=${API_KEY}&query=${query}&per_page=30`;
     }
     const response = await fetch(url);
     const data = await response.json();

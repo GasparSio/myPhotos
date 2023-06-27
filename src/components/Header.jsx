@@ -13,7 +13,7 @@ const Header = () => {
         <div className="header-container">
             <div className="icon-container">
                 <img src="../../logoGreen.png" alt="iconLogo" onClick={handleClick}/>
-                <span onClick={handleClick} style={{cursor:'pointer'}}>myPhotos</span>
+                <span>myPhotos</span>
             </div>
             <div className="links-container">
                 <NavLink to="/home" className='nav-link'>Home</NavLink>
