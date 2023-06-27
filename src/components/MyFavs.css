@@ -14,3 +14,22 @@
 .photos-fav-container-img{
     position: relative;
 }
+.modal-container{
+    position: fixed;
+    border-radius: 5px;
+    top: 30%;
+    width: 50%;
+    left: 26%;
+    background-color: #bec7bf;
+}
+.description-input-container{
+    width: 100%;
+}
+
+.input-description{
+    width: 90%;
+}
+.description-input-container button{
+    font-size: 10px;
+    width: 8%;
+}

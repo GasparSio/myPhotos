@@ -2,38 +2,48 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const favoritesSlice = createSlice({
   name: 'favorites',
-  initialState: [],
+  initialState: JSON.parse(localStorage.getItem('favorites')) || [],
   reducers: {
     addToFavorites: (state, action) => {
-      state.push(action.payload);
+      const { photo } = action.payload;
+      const existingImage = state.find((image) => image.id === photo.id);
+      if (!existingImage) {
+        const currentTime = new Date().toISOString();
+        const imageToAdd = {
+          id: photo.id,
+          description: photo.description,
+          width: photo.width,
+          height: photo.height,
+          likes: photo.likes,
+          urls: {
+            small: photo.urls.small,
+            thumb: photo.urls.thumb,
+            regular: photo.urls.regular,
+          },
+          timestamp: currentTime,
+        };
+        state.push(imageToAdd);
+        localStorage.setItem('favorites', JSON.stringify(state));
+      }
+      localStorage.setItem('favorites', JSON.stringify(state));
     },
     removeFromFavorites: (state, action) => {
-      return state.filter((image) => image.id !== action.payload);
+      const imageId = action.payload;
+      const updatedState = state.filter((image) => image.id !== imageId);
+      localStorage.setItem('favorites', JSON.stringify(updatedState));
+      return updatedState;
+    },
+    updatePhotoDescription: (state, action) => {
+      const updatedPhoto = action.payload;
+      const index = state.findIndex((photo) => photo.id === updatedPhoto.id);
+      if (index !== -1) {
+        state[index].description = updatedPhoto.description;
+        localStorage.setItem('favorites', JSON.stringify(state));
+      }
     },
   },
 });
 
-
-// const favoritesSliceX = createSlice({
-//   name: 'favorites',
-//   initialState: [],
-//   reducers: {
-//     addToFavorites: (state, action) => {
-//       const photoId = action.payload.id;
-//       if (!state.includes(photoId)) {
-//         state.push(photoId);
-//       }
-//     },
-//     removeFromFavorites: (state, action) => {
-//       const photoId = action.payload.id;
-//       const index = state.findIndex((id) => id === photoId);
-//       if (index !== -1) {
-//         state.splice(index, 1);
-//       }
-//     },
-//   },
-// });
-
-export const { addToFavorites, removeFromFavorites } = favoritesSlice.actions;
+export const { addToFavorites, removeFromFavorites, updatePhotoDescription } = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

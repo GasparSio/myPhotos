@@ -19,15 +19,18 @@ const SearchBar = () => {
     dispatch(searchPhotos(searchQuery));
   };
   const handleAddToFavorites = (photo) => {
-    dispatch(addToFavorites(photo));
-    setShowAlert(true);
-
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 1000);
+    const existingImage = favorites.find((image) => image.id === photo.id);
+    if (!existingImage) {
+      dispatch(addToFavorites({ photo }));
+      setShowAlert(true);
+  
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 1000);
+    }
   };
   
-  const isFavorite = (photoId) => favorites.includes(photoId);
+  // const isFavorite = (photoId) => favorites.includes(photoId);
 
   return (
     <div className='search-bar-container'>
@@ -52,7 +55,7 @@ const SearchBar = () => {
               <img src={photo.urls.small} alt={photo.alt_description} />
               <div onClick={() => handleAddToFavorites(photo)} className='fav-icon'>
                 <FavoriteIcon style={{
-                    color: favorites.includes(photo.id) ? 'red' : 'gray',
+                    color: favorites.find((image) => image.id === photo.id) ? 'red' : 'gray'
                   }}
                 />
               </div>
