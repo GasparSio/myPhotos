@@ -2,7 +2,10 @@
   "name": "oxy-pro2",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
   "homepage": "https://gasparsio.github.io/myPhotos",
+=======
+>>>>>>> gh-pages
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
