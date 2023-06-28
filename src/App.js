@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 
 //Import Components
-import Root from "./components/Root";
 import Home from "./components/Home";
 import Search from "./components/Search";
 import MyFavs from "./components/MyFavs";

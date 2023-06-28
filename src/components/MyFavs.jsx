@@ -140,7 +140,7 @@ const MyFavs = () => {
                                     <TextField
                                         className='input-description'
                                         label="Description"
-                                        value={selectedPhoto.description}
+                                        value={selectedPhoto.description || modifiedDescription}
                                         onChange={handleDescriptionChange}
                                     />
                                     <Button variant="contained" onClick={handleUpdateDescription}>
