@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, Alert, Stack, Modal } from '@mui/material';
+import { TextField, Alert, Stack, Modal, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { saveAs } from 'file-saver';
 
 import Header from "../components/Header";
 import Footer from "./Footer";
@@ -16,10 +17,26 @@ const MyFavs = () => {
     const dispatch = useDispatch();
     const favorites = useSelector((state) => state.favorites);
     const [showAlert, setShowAlert] = useState(false);
+    const [showAlertDescription, setShowAlertDescription] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [modifiedDescription, setModifiedDescription] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [sortOption, setSortOption] = useState('');
 
+    const filteredFavorites = favorites
+    .filter((photo) => photo && photo.description && photo.description.includes(searchQuery))
+    .sort((a, b) => {
+      if (sortOption === 'width') {
+        return a.width - b.width; // Ordenar por ancho (de menor a mayor)
+      } else if (sortOption === 'height') {
+        return a.height - b.height; // Ordenar por altura (de menor a mayor)
+      } else if (sortOption === 'likes') {
+        return a.likes - b.likes; // Ordenar por cantidad de likes (de menor a mayor)
+      } else {
+        return 0; // No se aplica ordenamiento
+      }
+    });
 
     const handleDeleteFromFavorites = (photo) => {
         dispatch(removeFromFavorites(photo));
@@ -37,90 +54,114 @@ const MyFavs = () => {
     const handleCloseModal = () => {
         setModalOpen(false);
     };
+
     const handleUpdateDescription = () => {
         dispatch(
           updatePhotoDescription({
             id: selectedPhoto.id,
-            description: modifiedDescription,
+            description: selectedPhoto.description,
           })
         );
+        setShowAlertDescription(true);
+    
+        setTimeout(() => {
+            setShowAlertDescription(false);
+        }, 2000);
       };
-      
-    const handleDownloadImage = () => {
-        // Descargar la imagen de la foto seleccionada
-        if (selectedPhoto) {
-            const link = document.createElement('a');
-            link.href = selectedPhoto.urls.small;
-            link.download = 'image.jpg';
-            link.click();
-        }
-    };
-    return (
+      const handleDescriptionChange = (e) => {
+        setSelectedPhoto((prevPhoto) => ({
+          ...prevPhoto,
+          description: e.target.value,
+        }));
+      };
+      // Actualiza la opción de ordenación seleccionada
+      const handleSortOptionChange = (event) => {
+        setSortOption(event.target.value); 
+      };
+      const downloadFav = (url, id) => {
+        saveAs(url, `${id}.jpeg`);
+      };
+      return (
         <>
-        <Header />
-        <main className='fav-container'>
-            <div className='input-container'>
-                <TextField
-                label="Search description"
-                // value={searchQuery}
-                // onChange={(e) => setSearchQuery(e.target.value)}
-                variant="outlined"
-                className='search-Input'
-                />
-                <Button variant="contained" color="success" className='search-button'>
-                Search
-                </Button>
-            </div>
-            <div className='sort-container'>
-
-            </div>    
-            <div className='photos-fav-container'>
-                {favorites.map((photo) => (
-                <div key={photo.id} className='photos-fav-container-img'>
-                    <img src={photo.urls.small} alt={photo.alt_description} />
-                    <div className='fav-icon'>
-                        <DeleteIcon color="success" onClick={() => handleDeleteFromFavorites(photo.id)}/>
-                        <EditIcon color="success" onClick={() => handleOpenModal(photo)}/>
-                    </div>
+            <Header />
+            <main className='fav-container'>
+                <div className='input-container'>
+                    <TextField
+                        label="Search description"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        variant="outlined"
+                        className='search-input-fav'
+                    />
                 </div>
-                ))}
-            </div>
-            {(showAlert) && (
-            <Stack spacing={2} className='alert-container'>
-                <Alert severity="success">Deleted from favorites</Alert>
-            </Stack>
-            )}
-            <Modal open={modalOpen} onClose={handleCloseModal}>
-                <div className='modal-container'>
-                    {selectedPhoto && (
-                    <div>
-                        <p>Width: {selectedPhoto.width}</p>
-                        <p>Height: {selectedPhoto.height}</p>
-                        <p>Likes: {selectedPhoto.likes}</p>
-                        <p>Timestamp: {selectedPhoto.timestamp}</p>
-                        <p>Description: {selectedPhoto.description}</p>
-                        <div className='description-input-container'>
-                            <TextField
-                                className='input-description'
-                                label="Description"
-                                value={modifiedDescription}
-                                onChange={(e) => setModifiedDescription(e.target.value)}
-                            />
-                            <Button variant="contained" color="success" onClick={handleUpdateDescription}>
-                                Save
-                            </Button>
+                <div className='sort-container'>
+                    <FormControl className='sort-form'>
+                        <InputLabel id="demo-simple-select-label" style={{color:'white'}}>Sort by</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={sortOption}
+                                label="age"
+                                onChange={handleSortOptionChange}
+                                style={{color:'white'}}
+                            >
+                                <MenuItem value="width" style={{color:'#07b96d'}}>Width</MenuItem>
+                                <MenuItem value="height" style={{color:'#07b96d'}}>Height</MenuItem>
+                                <MenuItem value="Likes" style={{color:'#07b96d'}}>Likes</MenuItem>
+                            </Select>
+                    </FormControl>
+                </div>
+                <div className='photos-fav-container'>
+                    {filteredFavorites.map((photo) => (
+                        <div key={photo.id} className='photos-fav-container-img'>
+                            <img src={photo.urls.small} alt={photo.alt_description} />
+                            <div className='fav-icon'>
+                                <EditIcon onClick={() => handleOpenModal(photo)} style={{color:'#0ae98a', cursor:'pointer'}}/>
+                                <DeleteIcon onClick={() => handleDeleteFromFavorites(photo.id)} style={{color:'#0ae98a', cursor:'pointer'}}/>
+                            </div>
                         </div>
-                        <FileDownloadIcon color="success" onClick={handleDownloadImage}>
-                            Download Image
-                        </FileDownloadIcon>
-                    </div>
-                    )}
+                    ))}
                 </div>
-            </Modal>
-        </main> 
-        <Footer />
+                {(showAlert) && (
+                    <Stack spacing={2} className='alert-container'>
+                        <Alert severity="success">Deleted from favorites</Alert>
+                    </Stack>
+                )}
+                <Modal open={modalOpen} onClose={handleCloseModal}>
+                    <div className='modal-container'>
+                        {selectedPhoto && (
+                            <div className='modal-container__text'>
+                                <p>Width: {selectedPhoto.width}</p>
+                                <p>Height: {selectedPhoto.height}</p>
+                                <p>Likes: {selectedPhoto.likes}</p>
+                                <p>Timestamp: {selectedPhoto.timestamp}</p>
+                                <p>Description: {selectedPhoto.description}</p>
+                                <div className='description-input-container'>
+                                    <TextField
+                                        className='input-description'
+                                        label="Description"
+                                        value={selectedPhoto.description}
+                                        onChange={handleDescriptionChange}
+                                    />
+                                    <Button variant="contained" onClick={handleUpdateDescription}>
+                                        Save
+                                    </Button>
+                                </div>
+                                <span onClick={() => downloadFav(selectedPhoto.urls.regular, selectedPhoto.id)}>
+                                    <FileDownloadIcon color='success' />
+                                </span>
+                            </div>
+                        )}
+                    </div>
+                </Modal>
+                {(showAlertDescription) && (
+                    <Stack spacing={2} className='alert-container'>
+                        <Alert severity="success">Description modified</Alert>
+                    </Stack>
+                )}
+            </main>
+            <Footer />
         </>
-        
     )
 }
 export default MyFavs;
