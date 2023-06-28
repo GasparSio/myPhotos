@@ -14,7 +14,7 @@ const Footer = () => {
             <p onClick={handleClick} style={{cursor:'pointer'}}>myPhotos. </p>
             <a 
             href="https://github.com/GasparSio"
-            rel="github.com/GasparSio"
+            rel="noopener noreferrer"
             target="_blank"
             >
             By Gaspar Sio.
