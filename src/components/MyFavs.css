@@ -19,6 +19,43 @@
 .fav-container p{
     color: azure;
 }
+
+
+.my-masonry-grid {
+    display: flex;
+    width: auto;
+    column-count: 3;
+}
+.my-masonry-grid_column {
+    padding-left: 8px; 
+    background-clip: padding-box;
+}
+.photos-fav-container-img {
+    position: relative;
+    margin-bottom: 8px; 
+}
+.photos-fav-container-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.image-container {
+    position: relative;
+}
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}  
+.fav-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* 
 .photos-fav-container{
     width: 100%;
     display: flex;
@@ -34,7 +71,11 @@
     width: 310px;
     height: 469px;
     border-radius: 5px;
-}
+} */
+
+
+
+
 .modal-container{
     display: flex;
     border-radius: 5px;

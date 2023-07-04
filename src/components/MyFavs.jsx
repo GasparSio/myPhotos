@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { saveAs } from 'file-saver';
+import Masonry from 'react-masonry-css';
 
 import Header from "../components/Header";
 import Footer from "./Footer";
@@ -112,15 +113,21 @@ const MyFavs = () => {
                     </FormControl>
                 </div>
                 <div className='photos-fav-container'>
-                    {filteredFavorites.map((photo) => (
-                        <div key={photo.id} className='photos-fav-container-img'>
+                <Masonry
+                    breakpointCols={3}
+                    className='my-masonry-grid'
+                    columnClassName='my-masonry-grid_column'
+                >
+                        {filteredFavorites.map((photo) => (
+                            <div key={photo.id} className='photos-fav-container-img'>
                             <img src={photo.urls.small} alt={photo.alt_description} />
                             <div className='fav-icon'>
                                 <EditIcon onClick={() => handleOpenModal(photo)} style={{color:'#0ae98a', cursor:'pointer'}}/>
                                 <DeleteIcon onClick={() => handleDeleteFromFavorites(photo.id)} style={{color:'#0ae98a', cursor:'pointer'}}/>
                             </div>
-                        </div>
-                    ))}
+                            </div>
+                        ))}
+                    </Masonry>
                 </div>
                 {(showAlert) && (
                     <Stack spacing={2} className='alert-container'>
