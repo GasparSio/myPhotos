@@ -68,6 +68,7 @@ const MyFavs = () => {
         setTimeout(() => {
             setShowAlertDescription(false);
         }, 2000);
+        setModalOpen(false);
       };
       const handleDescriptionChange = (e) => {
         setSelectedPhoto((prevPhoto) => ({
@@ -93,6 +94,17 @@ const MyFavs = () => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                         variant="outlined"
                         className='search-input-fav'
+                        sx={{
+                            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                              borderWidth: '1px', // Establece el ancho del borde en 1 píxel
+                              borderColor: 'transparent', // Establece el color del borde en transparente
+                            }
+                          }}
+                          InputLabelProps={{
+                            style: {
+                              color: 'black' // Establece el color del texto en blanco
+                            }
+                          }}
                     />
                 </div>
                 <div className='sort-container'>

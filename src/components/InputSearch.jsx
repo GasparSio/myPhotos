@@ -41,6 +41,17 @@ const SearchBar = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           variant="outlined"
           className='search-input'
+          sx={{
+            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderWidth: '1px', // Establece el ancho del borde en 1 píxel
+              borderColor: 'transparent', // Establece el color del borde en transparente
+            }
+          }}
+          InputLabelProps={{
+            style: {
+              color: 'black' // Establece el color del texto en blanco
+            }
+          }}
         >
         </TextField>
           <Button variant="contained" onClick={handleSearch} className='search-button'>
