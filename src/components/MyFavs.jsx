@@ -76,7 +76,7 @@ const MyFavs = () => {
           description: e.target.value,
         }));
       };
-      // Actualiza la opción de ordenación seleccionada
+      
       const handleSortOptionChange = (event) => {
         setSortOption(event.target.value); 
       };
