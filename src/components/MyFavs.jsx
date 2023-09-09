@@ -25,19 +25,20 @@ const MyFavs = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [sortOption, setSortOption] = useState('');
 
-    const filteredFavorites = favorites
-    // .filter((photo) => searchQuery && photo && photo.alt_description && photo.alt_description.includes(searchQuery))
-    // .sort((a, b) => {
-    //   if (sortOption === 'width') {
-    //     return a.width - b.width; // Ordenar por ancho (de menor a mayor)
-    //   } else if (sortOption === 'height') {
-    //     return a.height - b.height; // Ordenar por altura (de menor a mayor)
-    //   } else if (sortOption === 'likes') {
-    //     return a.likes - b.likes; // Ordenar por cantidad de likes (de menor a mayor)
-    //   } else {
-    //     return 0; // No se aplica ordenamiento
-    //   }
-    // });
+    const sortedFavorites = [...favorites].sort((a, b) => {
+        if (sortOption === 'width') {
+            return a.width - b.width; 
+        } else if (sortOption === 'height') {
+            return a.height - b.height; 
+        } else if (sortOption === 'likes') {
+            return a.likes - b.likes;
+        } else {
+            return 0; 
+        }
+    });
+    const filteredFavorites = searchQuery 
+        ? sortedFavorites.filter((photo) => photo && photo.alt_description && photo.alt_description.includes(searchQuery))
+        : sortedFavorites;
 
     const handleDeleteFromFavorites = (photo) => {
         dispatch(removeFromFavorites(photo));

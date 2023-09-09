@@ -12,7 +12,7 @@ const favoritesSlice = createSlice({
         const imageToAdd = {
           id: photo.id,
           description: photo.description,
-          altDescription: photo.alt_description,
+          alt_description: photo.alt_description,
           width: photo.width,
           height: photo.height,
           likes: photo.likes,
