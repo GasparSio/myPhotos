@@ -97,13 +97,13 @@ const MyFavs = () => {
                         className='search-input-fav'
                         sx={{
                             '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                              borderWidth: '1px', // Establece el ancho del borde en 1 píxel
-                              borderColor: 'transparent', // Establece el color del borde en transparente
+                              borderWidth: '1px', 
+                              borderColor: 'transparent', 
                             }
                           }}
                           InputLabelProps={{
                             style: {
-                              color: 'black' // Establece el color del texto en blanco
+                              color: 'black' 
                             }
                           }}
                     />

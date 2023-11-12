@@ -1,6 +1,5 @@
 {
   "name": "oxy-pro2",
-  "homepage": "https://gasparsio.github.io/myPhotos/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,6 +25,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
+    "deployaws": "aws s3 sync build/ s3://gasparsio-myphotos-app --delete --profile admin",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
