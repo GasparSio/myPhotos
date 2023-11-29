@@ -93,7 +93,7 @@ const MyFavs = () => {
                         label="Search description"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        variant="outlined"
+                        variant="filled"
                         className='search-input-fav'
                         sx={{
                             '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
@@ -103,7 +103,7 @@ const MyFavs = () => {
                           }}
                           InputLabelProps={{
                             style: {
-                              color: 'black' 
+                              color: 'black', 
                             }
                           }}
                     />

@@ -32,14 +32,21 @@ const SearchBar = () => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className='search-bar-container'>
       <div className='search-input-container'>
         <TextField
           label="Start searching"
           value={searchQuery}
+          onKeyDown={handleKeyPress}
           onChange={(e) => setSearchQuery(e.target.value)}
-          variant="outlined"
+          variant="filled"
           className='search-input'
           sx={{
             '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
