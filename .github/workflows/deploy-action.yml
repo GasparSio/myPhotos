@@ -1,8 +1,3 @@
-name: my-photo-deploy-action
-on: [push]
-jobs:
-  Explore-Github-Actions:
-  runs-on: 
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
