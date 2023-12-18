@@ -13,7 +13,8 @@
 }
 .icon-container span{
     margin-left: 8px;
-    color: #0ae98a;
+    /* color: #0ae98a; */
+    color: red;
 }
 .icon-container img{
     width: 35px;
