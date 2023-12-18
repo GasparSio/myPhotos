@@ -10,14 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Install Dependencies
         run: npm i
-      - name: Run Build
         run: npm run build
         env:
           CI: false
       - uses: jakejarvis/s3-sync-action@master
-      - name: Upload to AWS
         with:
           args: --acl public-read --follow-symlinks --delete
         env:
